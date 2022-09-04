@@ -1,4 +1,4 @@
-function help-start(){
+function helpStart(){
 echo "
 #Definitions
 \$wifi_name,\$disk
@@ -50,9 +50,11 @@ mount -o noatime,space_cache=v2,compress=zstd,ssd,discard=async,subvol=@home /de
 mount /dev/sda1 /mnt/boot/
 lsblk
 ########## install script ##########
+./installation/install.sh --install
 ### Arch chroot
 arch-chroot /mnt
 ########## arch-chroot script ##########
+./installation/install.sh --arch-chroot
 exit
 umount -R /mnt
 reboot
@@ -88,7 +90,7 @@ function install() {
 }
 
 
-function arch--chroot() {
+function archChroot() {
 	#### 1) Time zone
 		ln -sf /usr/share/zoneinfo/Europe/Bratislava /etc/localtime
                 hwclock --systohc
@@ -153,7 +155,7 @@ function arch--chroot() {
         #### 11) Journal
         ###        sed -i '/Storage=auto/s/.*/Storage=volatile;/RuntimeMaxUse=/s/.*/RuntimeMaxUse=30M' /etc/systemd/journald.conf
 }
-function postinstall() {
+function postInstall() {
 	# Update mirrorlist
 	cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -c Slovakia -c Czechia -a 10 --sort rate --save /etc/pacman.d/mirrorlist
@@ -249,20 +251,22 @@ function postinstall() {
 
 case "$1" in
 	-h)
-		help-start
+		helpStart
+		;;
 	--help)
-		help-start
-    --install)
-        install
-	;;
-    --arch-chroot)
-        arch-chroot
-        ;;
-    --postinstall)
-        postinstall
-        ;;
-    *)
-        # By default print output for bar
-	echo "Error: Option doesn't exist"
-        ;;
+		helpStart
+		;;
+    	--install)
+        	install
+		;;
+    	--arch-chroot)
+        	archChroot
+        	;;
+    	--post-install)
+        	postInstall
+        	;;
+    	*)
+        	# By default print output for bar
+		echo "Error: Option doesn't exist"
+        	;;
 esac
