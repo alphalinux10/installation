@@ -12,6 +12,8 @@ iwctl
 	station wla0 connect \$wifi_name
 exit
 ping archlinux.org
+### Download git
+git clone https://github.com/alphalinux10/installation.git
 ### Synchronize pacman pkgs
 pacman -Sy
 ### Syncronize time protocol
