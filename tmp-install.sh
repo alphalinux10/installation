@@ -13,8 +13,6 @@ iwctl station wla0 connect $wifi_name
 ping archlinux.org
 ### Syncronize time protocol
 timedatectl set-ntp true
-
-pacman -Syu
 ### Partitioning
 lsblk
 gdisk $disk
@@ -107,7 +105,7 @@ vim /etc/mkinitcpio.conf
 	MODULES=(btrfs)
 	#MODULES=(btrfs amdgpu)
 mkinitcpio -p linux
-
+exit
 umount -R /mnt
 reboot
 
