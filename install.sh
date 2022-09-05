@@ -53,10 +53,13 @@ mount /dev/sda1 /mnt/boot/
 lsblk
 ########## install script ##########
 ./installation/install.sh --install
+mv installation /mnt/root/
 ### Arch chroot
 arch-chroot /mnt
+cd
 ########## arch-chroot script ##########
 ./installation/install.sh --arch-chroot
+mv installation /home/alpha/
 exit
 umount -R /mnt
 reboot
@@ -202,7 +205,7 @@ function archChroot() {
 
 function postInstall() {
 	# Update mirrorlist
-	cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -c Slovakia -c Czechia -a 10 --sort rate --save /etc/pacman.d/mirrorlist
 	### Synchronize pacman pkgs
 	sudo pacman --noconfirm --needed -Syy
