@@ -15,10 +15,12 @@ ping archlinux.org
 ### Synchronize pacman pkgs
 pacman -Sy
 ### Download git
+pacman -S git
 git clone https://github.com/alphalinux10/installation.git
 ### Syncronize time protocol
 timedatectl set-ntp true
-### Partitioning
+hwclock --systohc
+### Partitioning (d for delete partition)
 lsblk
 gdisk \$disk
 	n
@@ -160,10 +162,11 @@ function archChroot() {
 		installPacman sane ipp-usb sane-airscan simple-scan
 		systemctl enable ipp-usb.service
 		### Virt-manager
+		pacman --noconfirm --needed -R iptables
         installPacman virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft
 		systemctl enable libvirtd.service
 		### System information
-		installPacman usbutils hwinfo neofetch sysstats
+		installPacman usbutils hwinfo neofetch sysstat
 
 		### Other
 		installPacman bash-completion openssh rsync reflector acpi acpi_call acpid tlp bridge-utils vde2 openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid ntfs-3g terminus-font avahi gvfs gvfs-smb nfs-utils inetutils dnsutils
