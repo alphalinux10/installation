@@ -71,12 +71,11 @@ setfont ter-132n
 passwd
 passwd alpha
 ### Wifi connection
-ip a
-iwctl
-	station wla0 connect \$wifi_name
-exit
-ping archlinux.org
+nmtui
+sudo chown alpha:alpha installation/install.sh
 ########## post-install script ##########
+./installation/install.sh --post-install
+reboot
 "
 }
 
