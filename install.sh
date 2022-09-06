@@ -223,7 +223,7 @@ function postInstall() {
 	cd BuildApps
 	git clone https://aur.archlinux.org/paru-bin
 	cd paru-bin
-	makepkg -si
+	makepkg --noconfirm --needed -si
 	cd
 
 	### TIMESHIFT
@@ -252,7 +252,8 @@ function postInstall() {
 		## XORG
 		installSudoPacman xorg-server xorg-apps xorg-xinit xf86-input-libinput libinput xf86-input-evdev xf86-input-wacom
 		## Web Browsers
-		installSudoPacman brave-bin firefox librewolf
+		installSudoPacman firefox 
+		installParu brave-bin librewolf-bin
 		## Terminals
 		installSudoPacman alacritty rxvt-unicode
 		installParu st
@@ -270,12 +271,12 @@ function postInstall() {
         		sudo make install
         		#git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
         		cd ..
-			installSudoPacman xsel wl-clipboard pip npm ripgrep
+			installSudoPacman xsel wl-clipboard python-pip npm ripgrep
         		#pip install pynvim
         		#npm i -g neovim
         		### xdg-ninja
         		git clone https://github.com/b3nj5m1n/xdg-ninja.git
-        		sudo pacman -S jq glow
+        		installSudoPacman jq glow
 		# Tools
 		installSudoPacman xdo bash-completion git wget dunst udevil arandr youtube-dl htop iio-sensor-proxy inotify-tools redshift conky 
 		## File Managers
@@ -312,27 +313,28 @@ function postInstall() {
 	installSudoPacman android-tools android-udev scrcpy
 	installParu sndcpy-bin 
 		
-		#Network
-		paru -S networkmanager-dmenu-git
+	#Network
+	installParu networkmanager-dmenu-git
 
-		#card reader
-		sudo pacman -S ccid libnfc acsccid pcsclite pcsc-tools
-		sudo systemctl enable pcscd
+	#card reader
+	sudo pacman -S ccid libnfc acsccid pcsclite pcsc-tools
+	sudo systemctl enable pcscd
+
+
+	#sudo pacman -S --noconfirm picom nitrogen lxappearance dmenu arandr simplescreenrecorder alsa-utils pulseaudio alsa-utils pulseaudio-alsa pavucontrol arc-gtk-theme arc-icon-theme dina-font tamsyn-font bdf-unifont ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid gnu-free-fonts ttf-ibm-plex ttf-liberation ttf-linux-libertine noto-fonts ttf-roboto tex-gyre-fonts ttf-ubuntu-font-family ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-inconsolata ttf-jetbrains-mono ttf-monofur adobe-source-code-pro-fonts cantarell-fonts inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk noto-fonts-emoji ttf-font-awesome awesome-terminal-fonts archlinux-wallpaper playerctl scrot obs-studio dunst pacman-contrib
+
+	sudo systemctl enable sshd
+	sudo systemctl enable avahi-daemon
+	sudo systemctl enable tlp
+	sudo systemctl enable reflector.timer
+	sudo systemctl enable fstrim.timer
+	sudo systemctl enable libvirtd
+	sudo systemctl enable acpid
+	sudo systemctl enable --now firewalld
 
 	sudo firewall-cmd --add-port=1025-65535/tcp --permanent
 	sudo firewall-cmd --add-port=1025-65535/udp --permanent
 	sudo firewall-cmd --reload
-
-	#sudo pacman -S --noconfirm picom nitrogen lxappearance dmenu arandr simplescreenrecorder alsa-utils pulseaudio alsa-utils pulseaudio-alsa pavucontrol arc-gtk-theme arc-icon-theme dina-font tamsyn-font bdf-unifont ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid gnu-free-fonts ttf-ibm-plex ttf-liberation ttf-linux-libertine noto-fonts ttf-roboto tex-gyre-fonts ttf-ubuntu-font-family ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-inconsolata ttf-jetbrains-mono ttf-monofur adobe-source-code-pro-fonts cantarell-fonts inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk noto-fonts-emoji ttf-font-awesome awesome-terminal-fonts archlinux-wallpaper playerctl scrot obs-studio dunst pacman-contrib
-
-		systemctl enable sshd
-		systemctl enable avahi-daemon
-		systemctl enable tlp
-		systemctl enable reflector.timer
-		systemctl enable fstrim.timer
-		systemctl enable libvirtd
-		systemctl enable firewalld
-		systemctl enable acpid
 }
 
 case "$1" in
