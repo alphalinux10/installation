@@ -218,7 +218,7 @@ function postInstall() {
 	sudo pacman --noconfirm --needed -Syu
 
 	### AUR
-	mkdir BuildApps
+	mkdir -p BuildApps
 	cd BuildApps
 	git clone https://aur.archlinux.org/paru-bin
 	cd paru-bin
@@ -246,8 +246,12 @@ function postInstall() {
 	installSudoPacman xf86-input-synaptics
 	cp $HOME/installation/conf/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 
-	mkdir -p ~/Programs
 	# Programs
+		## System apps
+		installSudoPacman htop powertop
+		## Languages
+		installSudoPacman qt
+		installParu pacfinder
 		## XORG
 		installSudoPacman xorg-server xorg-apps xorg-xinit xf86-input-libinput libinput xf86-input-evdev xf86-input-wacom
 		## Web Browsers
@@ -256,12 +260,14 @@ function postInstall() {
 		## Terminals
 		installSudoPacman alacritty rxvt-unicode
 		installParu st
+		## Awesome Bar
+		installSudoPacman discord blueberry cbatticon volumeicon
 		## WM
 		installSudoPacman awesome dmenu
 		# Editors
 		installSudoPacman code
         		### neovim
-        		cd Programs
+        		cd BuildApps
 			installSudoPacman cmake unzip ninja tree-sitter curl
         		git clone https://github.com/neovim/neovim.git
         		cd neovim
@@ -269,27 +275,31 @@ function postInstall() {
         		make CMAKE_BUILD_TYPE=Release
         		sudo make install
         		#git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
-        		cd ..
+        		cd
 			installSudoPacman xsel wl-clipboard python-pip npm ripgrep
+        		cd BuildApps
         		#pip install pynvim
         		#npm i -g neovim
         		### xdg-ninja
         		git clone https://github.com/b3nj5m1n/xdg-ninja.git
         		installSudoPacman jq glow
+			cd
 		# Tools
-		installSudoPacman xdo bash-completion git wget dunst udevil arandr youtube-dl htop iio-sensor-proxy inotify-tools redshift conky 
+		installSudoPacman xdo bash-completion git wget dunst arandr youtube-dl htop iio-sensor-proxy inotify-tools redshift conky 
+		installParu udevil
 		## File Managers
 			# xplr
 			installSudoPacman xplr imv xdotool
 			# thunar
-			installSudoPacman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman meld
+			installSudoPacman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman meld catfish
 			# nemo
-    		installSudoPacman $(sudo pacman -Ss nemo | grep "community/" | awk '{print $1}' | sed "s<community/<<g" | tr '\n' ' ')
+    			installSudoPacman $(sudo pacman -Ss nemo | grep "community/" | awk '{print $1}' | sed "s<community/<<g" | tr '\n' ' ')
 			# other
-			installSudoPacman lf clifm
+			installParu lf-bin clifm
 
 		## Docs
-		installSudoPacman libreoffice onlyoffice-bin
+		installSudoPacman libreoffice
+		installParu onlyoffice-bin
 		## ImageEditors
 		installSudoPacman sxiv feh gimp inkscape blender
 		## Image/Video capture
@@ -299,7 +309,10 @@ function postInstall() {
 		## Compression
 		installSudoPacman zip gzip unzip
 		## Fonts
-		installSudoPacman awesome-terminal-fonts adobe-source-sans-pro-fonts bdf-unifont cantarell-fonts dina-font noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font ttf-croscore gnu-free-fonts ttf-ibm-plex ttf-linux-libertine tex-gyre-fonts ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-jetbrains-mono ttf-monofur inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk noto-fonts-emoji ttf-font-awesome 
+		installSudoPacman awesome-terminal-fonts adobe-source-sans-pro-fonts cantarell-fonts dina-font noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font ttf-croscore gnu-free-fonts ttf-ibm-plex ttf-linux-libertine tex-gyre-fonts ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-jetbrains-mono ttf-monofur inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk ttf-font-awesome 
+
+		installSudoPacman noto-fonts-emoji ttf-joypixels
+		installParu font-manager-git ttf-twemoji otf-openmoji ttf-twemoji-color ttf-symbola otf-font-awesome-4 ttf-font-awesome-4 otf-font-awesome-5 ttf-font-awesome-5 bdf-unifont
 		## Themes
 		installSudoPacman arc-gtk-theme arc-icon-theme 
 		## Other
