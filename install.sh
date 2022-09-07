@@ -250,7 +250,7 @@ function postInstall() {
 		## System apps
 		installSudoPacman htop powertop
 		## Languages
-		installSudoPacman qt
+		installSudoPacman qt zenity
 		installParu pacfinder
 		## XORG
 		installSudoPacman xorg-server xorg-apps xorg-xinit xf86-input-libinput libinput xf86-input-evdev xf86-input-wacom
