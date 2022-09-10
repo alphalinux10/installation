@@ -304,7 +304,7 @@ function postInstall() {
 		installSudoPacman libreoffice
 		installParu onlyoffice-bin
 		## ImageEditors
-		installSudoPacman sxiv feh gimp inkscape blender
+		installSudoPacman sxiv feh gimp inkscape blender darktable
 		## Image/Video capture
 		installSudoPacman flameshot scrot simplescreenrecorder obs-studio
 		## Video players
