@@ -231,12 +231,16 @@ function postInstall() {
 
 	### ZRAMD
 	installParu zramd
-	sudo systemctl enable --now zramd.service
+	sudo systemctl enable zramd.service
 	lsblk
 
 	### SDDM
 	installSudoPacman sddm
-	sudo systemctl enable --now sddm.service
+	sudo systemctl enable sddm.service
+	installParu materia-gtk-theme
+
+	# arch linux tweak tool
+	installParu archlinux-tweak-tool-git
 
 	##Touchscreen
 	if [[ $(lsusb | grep "Touch") != '' ]]; then
