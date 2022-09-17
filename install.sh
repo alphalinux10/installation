@@ -254,8 +254,8 @@ function postInstall() {
 	installSudoPacman onboard
 
 	# Programs
-		## System apps
-		installSudoPacman htop powertop
+		### System information
+		installSudoPacman htop powertop cheat-bin
 		## Languages
 		installSudoPacman qt zenity
 		installParu pacfinder
