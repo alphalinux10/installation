@@ -316,7 +316,7 @@ function postInstall() {
 		## Compression
 		installSudoPacman zip gzip unzip
 		## Fonts
-		installSudoPacman awesome-terminal-fonts adobe-source-sans-pro-fonts cantarell-fonts dina-font noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font ttf-croscore gnu-free-fonts ttf-ibm-plex ttf-linux-libertine tex-gyre-fonts ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-jetbrains-mono ttf-monofur inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk ttf-font-awesome 
+		installSudoPacman awesome-terminal-fonts adobe-source-sans-pro-fonts cantarell-fonts dina-font noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font ttf-croscore gnu-free-fonts ttf-ibm-plex ttf-linux-libertine tex-gyre-fonts ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-jetbrains-mono ttf-monofur inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk ttf-font-awesome powerline-fonts
 
 		installSudoPacman noto-fonts-emoji ttf-joypixels
 		installParu font-manager-git ttf-twemoji otf-openmoji ttf-twemoji-color ttf-symbola otf-font-awesome-4 ttf-font-awesome-4 otf-font-awesome-5 ttf-font-awesome-5 bdf-unifont
@@ -342,13 +342,16 @@ function postInstall() {
 
 	#sudo pacman -S --noconfirm picom nitrogen lxappearance dmenu arandr simplescreenrecorder alsa-utils pulseaudio alsa-utils pulseaudio-alsa pavucontrol arc-gtk-theme arc-icon-theme dina-font tamsyn-font bdf-unifont ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid gnu-free-fonts ttf-ibm-plex ttf-liberation ttf-linux-libertine noto-fonts ttf-roboto tex-gyre-fonts ttf-ubuntu-font-family ttf-anonymous-pro ttf-cascadia-code ttf-fantasque-sans-mono ttf-fira-mono ttf-hack ttf-fira-code ttf-inconsolata ttf-jetbrains-mono ttf-monofur adobe-source-code-pro-fonts cantarell-fonts inter-font ttf-opensans gentium-plus-font ttf-junicode adobe-source-han-sans-otc-fonts adobe-source-han-serif-otc-fonts noto-fonts-cjk noto-fonts-emoji ttf-font-awesome awesome-terminal-fonts archlinux-wallpaper playerctl scrot obs-studio dunst pacman-contrib
 
+	installSudoPacman upower
+
 	sudo systemctl enable sshd
 	sudo systemctl enable avahi-daemon
-	sudo systemctl enable tlp
+	#sudo systemctl enable tlp
+	sudo systemctl enable upower
 	sudo systemctl enable reflector.timer
 	sudo systemctl enable fstrim.timer
 	sudo systemctl enable libvirtd
-	sudo systemctl enable acpid
+	#sudo systemctl enable acpid
 	sudo systemctl enable --now firewalld
 
 	sudo firewall-cmd --add-port=1025-65535/tcp --permanent
