@@ -336,7 +336,7 @@ function postInstall() {
 	installParu networkmanager-dmenu-git
 
 	#card reader
-	sudo pacman -S ccid libnfc acsccid pcsclite pcsc-tools
+	installSudoPacman ccid libnfc acsccid pcsclite pcsc-tools
 	sudo systemctl enable pcscd
 
 
@@ -357,6 +357,10 @@ function postInstall() {
 	sudo firewall-cmd --add-port=1025-65535/tcp --permanent
 	sudo firewall-cmd --add-port=1025-65535/udp --permanent
 	sudo firewall-cmd --reload
+	
+
+	installSudoPacman polkit-gnome
+	installParu cpu-x mailspring
 }
 
 case "$1" in
