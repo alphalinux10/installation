@@ -361,6 +361,7 @@ function postInstall() {
 
 	installSudoPacman polkit-gnome
 	installParu cpu-x mailspring
+	installSudoPacman polkit-gnome wine winetricks p7zip
 }
 
 case "$1" in
