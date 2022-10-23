@@ -354,6 +354,8 @@ function postInstall() {
 	#sudo systemctl enable acpid
 	sudo systemctl enable --now firewalld
 
+	systemctl --user enable pipewire pipewire-pulse
+
 	sudo firewall-cmd --add-port=1025-65535/tcp --permanent
 	sudo firewall-cmd --add-port=1025-65535/udp --permanent
 	sudo firewall-cmd --reload
